@@ -3,6 +3,7 @@ package me.gram.underwaterffa.Listener.players;
 import me.gram.underwaterffa.Handler.Game;
 import me.gram.underwaterffa.Listener.MGListener;
 import me.gram.underwaterffa.UnderwaterFFA;
+import me.gram.underwaterffa.states.GameManager;
 import me.gram.underwaterffa.states.GameState;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -16,7 +17,6 @@ public class PlayerQuit extends MGListener {
 
     @EventHandler
     public void onPlayerquit(PlayerQuitEvent event){
-        if(GameState.isState(GameState.IN_LOBBY))
             Game.setCanStart(Bukkit.getOnlinePlayers().size() -1 >= 2);
     }
 }

@@ -1,15 +1,15 @@
 package me.gram.underwaterffa.Listener;
 
-import me.gram.underwaterffa.states.GameState;
+import me.gram.underwaterffa.states.GameManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class BlockBreakListener implements Listener {
 
-    private GameState gameManager;
+    private GameManager gameManager;
 
-    public BlockBreakListener(GameState gameManager){
+    public BlockBreakListener(GameManager gameManager){
         this.gameManager = gameManager;
     }
 

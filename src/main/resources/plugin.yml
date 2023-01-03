@@ -2,3 +2,9 @@ name: UnderwaterFFA
 version: '${project.version}'
 main: me.gram.underwaterffa.UnderwaterFFA
 api-version: 1.19
+
+commands:
+  start:
+    description: start the UnderwaterFFA minigame
+  stop:
+    description: stop the UnderwaterFFA minigame
