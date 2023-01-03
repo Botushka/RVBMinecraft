@@ -1,0 +1,4 @@
+name: UnderwaterFFA
+version: '${project.version}'
+main: me.gram.underwaterffa.UnderwaterFFA
+api-version: 1.19
