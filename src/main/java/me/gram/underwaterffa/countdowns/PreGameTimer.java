@@ -2,8 +2,13 @@ package me.gram.underwaterffa.countdowns;
 
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
+import me.gram.underwaterffa.Utils.ItemBuilder;
+import me.gram.underwaterffa.Utils.PlayerUtils;
 import me.gram.underwaterffa.states.GameState;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PreGameTimer {
@@ -15,7 +20,7 @@ public class PreGameTimer {
     public void startCountdown() {
         new BukkitRunnable() {
 
-            int number = 30;
+            int number = 3;
 
             @Override
             public void run() {
@@ -45,11 +50,16 @@ public class PreGameTimer {
                     if (number == 1) {
                         Bukkit.broadcastMessage(new ChatUtils(main).prefix + "Game starting in 1 second.");
                         // DO PREGAME THINGS, SCATTER, KITS, ETC
+
                     }
                     number--;
+
+
                 } else {
+                    new PlayerUtils(main).giveMinigameItems();
                     Bukkit.broadcastMessage(new ChatUtils(main).prefix + "The game has now started!");
                     cancel();
+
                 }
             }
         }.runTaskTimer(main,20L, 20L);

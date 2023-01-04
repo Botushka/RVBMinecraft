@@ -25,7 +25,6 @@ public class PlayerManager {
             player.setFoodLevel(20);
             player.setGameMode(GameMode.SURVIVAL);
             player.setAllowFlight(false);
-            player.sendMessage(new ChatUtils(main).prefix + "Welcome to the MiniGame!");
             Bukkit.broadcastMessage(new ChatUtils(main).prefix + player.getDisplayName() + " has joined the minigame.");
         } else if (main.getGamestate() == GameState.INGAME || main.getGamestate() == GameState.ENDGAME) {
             main.alive.remove(player);

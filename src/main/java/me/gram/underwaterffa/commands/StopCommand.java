@@ -3,9 +3,6 @@ package me.gram.underwaterffa.commands;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.countdowns.EndGameTimer;
-import me.gram.underwaterffa.countdowns.PreGameTimer;
-import me.gram.underwaterffa.states.GameManager;
-import me.gram.underwaterffa.states.GameState;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +23,7 @@ public class StopCommand implements CommandExecutor {
             return true;
         } else if (cmd.getName().equalsIgnoreCase("stop")) {
             new EndGameTimer(main).EndCountdown();
-            p.sendMessage(new ChatUtils(main).prefix + "You have started the game.");
+            p.sendMessage(new ChatUtils(main).prefix + "You have stopped the current game!");
             return true;
         }
         return true;

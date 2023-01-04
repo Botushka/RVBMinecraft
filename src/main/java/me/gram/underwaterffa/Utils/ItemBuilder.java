@@ -1,6 +1,6 @@
 package me.gram.underwaterffa.Utils;
 
-import me.gram.underwaterffa.states.GameManager;
+import me.gram.underwaterffa.UnderwaterFFA;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,16 +10,26 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ItemBuilder {
 
     public ItemStack item;
+    public ItemStack gear;
 
-    private GameManager gameManager;
-    public ItemBuilder(GameManager gameManager){
-        this.gameManager = gameManager;
+    private UnderwaterFFA main;
+    public ItemBuilder(UnderwaterFFA main) {
+        this.main = main;
     }
 
 
-    /** ITEM BUILDER**/
-    public ItemBuilder Builditem(Material material){
-        item = new ItemStack(material);
+
+    /**
+     * ITEM BUILDER
+     **/
+    public ItemStack Builditem(Material material, int amount){
+        item = new ItemStack(material, amount);
+        return item;
+    }
+
+
+    public ItemBuilder BuildArmor(Material armor){
+        gear = new ItemStack(armor);
         return this;
     }
 
@@ -28,13 +38,9 @@ public class ItemBuilder {
         return this;
     }
     public ItemBuilder setName(String name){
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        item.setItemMeta(meta);
-        return this;
-    }
-
-    public ItemBuilder buildItem(){
+        ItemMeta im = item.getItemMeta();
+        im.setDisplayName(name);
+        item.setItemMeta(im);
         return this;
     }
 

@@ -1,35 +1,56 @@
 package me.gram.underwaterffa.Utils;
 
-import me.gram.underwaterffa.states.GameManager;
+import me.gram.underwaterffa.UnderwaterFFA;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.units.qual.C;
+
+import java.util.UUID;
+
 
 public class PlayerUtils{
 
-    private GameManager gameManager;
-    public PlayerUtils(GameManager gameManager){
-        this.gameManager = gameManager;
+    private UnderwaterFFA main;
+    public PlayerUtils(UnderwaterFFA main) {
+        this.main = main;
     }
-
     /** PLAYER UTILS**/
-    private ItemBuilder im;
-    public void minigameItems(Player player){
-        im.Builditem(Material.IRON_SWORD).setAmount(1).addEnchant(Enchantment.DURABILITY, 10).setName("&4Blade");
-        im.Builditem(Material.BOW).setAmount(1).addEnchant(Enchantment.DURABILITY, 10).setName("&4Quiver");
-        im.Builditem(Material.ARROW).setAmount(3).addEnchant(Enchantment.DURABILITY, 10).setName("&4Arrow");
-        player.getInventory().addItem(this.im.item);
+
+    public void giveMinigameItems(){
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::giveMinigameItem);
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::giveMinigameItem);
+}
+
+    public void giveMinigameItem(Player player){
+        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.IRON_SWORD, 1));
+        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.BOW, 1));
+        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.ARROW, 16));
 
     }
-    public  PlayerUtils removeItems(){
-        return this;
+
+
+    public  void removeItems(){
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::removeItem);
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::removeItem);
     }
+
+    public void removeItem(Player player){
+        player.getInventory().clear();
+    }
+
+
 
     public boolean playerCanAttack() {
         return true;
     }
 
-    public ItemBuilder getItemBuilder() {return im;}
+
 }
     /** PLAYER UTILS**/
 

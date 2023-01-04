@@ -3,8 +3,6 @@ package me.gram.underwaterffa.commands;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.countdowns.PreGameTimer;
-import me.gram.underwaterffa.states.GameManager;
-import me.gram.underwaterffa.states.GameState;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
