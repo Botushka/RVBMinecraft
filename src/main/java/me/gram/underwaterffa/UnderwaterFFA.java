@@ -45,7 +45,6 @@ public final class UnderwaterFFA extends JavaPlugin{
     @Override
     public void onEnable() {
         setGamestate(GameState.LOBBY);
-        this.gameManager = new GameManager(this);
         registerCommands();
         registerEvents();
     }
@@ -56,9 +55,9 @@ public final class UnderwaterFFA extends JavaPlugin{
     }
 
     private void registerCommands(){
-        getCommand("Start").setExecutor(new StartCommand(gameManager));
-        getCommand("stop").setExecutor(new StopCommand(gameManager));
-        getCommand("vanish").setExecutor(new Vanish(this));
+        getCommand("Start").setExecutor(new StartCommand(this));
+        getCommand("stop").setExecutor(new StopCommand(this));
+        getCommand("v").setExecutor(new Vanish(this));
     }
 
     private void registerEvents(){

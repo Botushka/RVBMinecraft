@@ -40,7 +40,7 @@ public class Vanish implements CommandExecutor{
         if (!p.hasPermission("server.vanish")) {
             p.sendMessage(new ChatUtils(main).permission);
             return true;
-        } else if (cmd.getName().equalsIgnoreCase("vanish")) {
+        } else if (cmd.getName().equalsIgnoreCase("v")) {
             toggleVanish(p);
             return true;
         }
