@@ -2,41 +2,25 @@ package me.gram.underwaterffa.Utils;
 
 import me.gram.underwaterffa.states.GameManager;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-public class PlayerUtils {
-
-    public ItemStack item;
+public class PlayerUtils{
 
     private GameManager gameManager;
-
-
-    /** ITEM BUILDER**/
-    public PlayerUtils(Material material){
-        item = new ItemStack(material);
+    public PlayerUtils(GameManager gameManager){
+        this.gameManager = gameManager;
     }
-
-    public PlayerUtils setAmount(int amount){
-        item.setAmount(amount);
-        return this;
-    }
-    public PlayerUtils setName(String name){
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
-        item.setItemMeta(meta);
-        return this;
-    }
-
-    public PlayerUtils buildItem(){
-        return this;
-    }
-    /** ITEM BUILDER**/
 
     /** PLAYER UTILS**/
+    private ItemBuilder im;
+    public void minigameItems(Player player){
+        im.Builditem(Material.IRON_SWORD).setAmount(1).addEnchant(Enchantment.DURABILITY, 10).setName("&4Blade");
+        im.Builditem(Material.BOW).setAmount(1).addEnchant(Enchantment.DURABILITY, 10).setName("&4Quiver");
+        im.Builditem(Material.ARROW).setAmount(3).addEnchant(Enchantment.DURABILITY, 10).setName("&4Arrow");
+        player.getInventory().addItem(this.im.item);
 
+    }
     public  PlayerUtils removeItems(){
         return this;
     }
@@ -44,5 +28,11 @@ public class PlayerUtils {
     public boolean playerCanAttack() {
         return true;
     }
-    /** PLAYER UTILS**/
+
+    public ItemBuilder getItemBuilder() {return im;}
 }
+    /** PLAYER UTILS**/
+
+
+
+

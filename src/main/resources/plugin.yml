@@ -7,4 +7,6 @@ commands:
   start:
     description: start the UnderwaterFFA minigame
   stop:
-    description: stop the UnderwaterFFA minigame
+    description: stop the UnderwaterFFA minigame'
+  vanish:
+    description: go invisible
