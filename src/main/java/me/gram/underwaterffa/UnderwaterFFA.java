@@ -23,6 +23,7 @@ public final class UnderwaterFFA extends JavaPlugin{
      * cool underwater map
      * Killstreaks
      * Teams
+     * Blue vs Red scoreboard 100kills to win
      * Ability to set spawns (waiting lobby) Blue and Red team spawns
      * Database
      */
