@@ -2,13 +2,14 @@ package me.gram.underwaterffa;
 
 import me.gram.underwaterffa.Listener.MGListener;
 import me.gram.underwaterffa.Listener.players.PlayerJoin;
+import me.gram.underwaterffa.Listener.players.SwimListener;
+import me.gram.underwaterffa.Teams.RedBlueTeam;
 import me.gram.underwaterffa.commands.StartCommand;
 import me.gram.underwaterffa.commands.StopCommand;
 import me.gram.underwaterffa.commands.Vanish;
 import me.gram.underwaterffa.states.GameManager;
 import me.gram.underwaterffa.states.GameState;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,7 +53,7 @@ public final class UnderwaterFFA extends JavaPlugin{
 
     @Override
     public void onDisable(){
-
+        new RedBlueTeam(this).clearTeams();
     }
 
     private void registerCommands(){
@@ -65,6 +66,7 @@ public final class UnderwaterFFA extends JavaPlugin{
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new MGListener(this), this);
+        pm.registerEvents(new SwimListener(this), this);
     }
 
 }

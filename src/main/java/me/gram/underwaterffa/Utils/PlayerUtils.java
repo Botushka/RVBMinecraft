@@ -10,8 +10,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 
-import java.util.UUID;
-
 
 public class PlayerUtils{
     private ItemBuilder items;
@@ -26,6 +24,8 @@ public class PlayerUtils{
     public void giveMinigameItems(){
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::giveMinigameItem);
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::giveMinigameItem);
+
+
 }
 
     public void giveMinigameItem(Player player){
@@ -37,10 +37,10 @@ public class PlayerUtils{
         player.addPotionEffect(Dolphin);
     }
 
-
     public  void removeItems(){
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::removeItem);
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::removeItem);
+
     }
 
     public void removeItem(Player player){

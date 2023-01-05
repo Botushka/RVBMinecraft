@@ -1,14 +1,11 @@
 package me.gram.underwaterffa.countdowns;
 
+import me.gram.underwaterffa.Teams.RedBlueTeam;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
-import me.gram.underwaterffa.Utils.ItemBuilder;
 import me.gram.underwaterffa.Utils.PlayerUtils;
 import me.gram.underwaterffa.states.GameState;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PreGameTimer {
@@ -56,6 +53,7 @@ public class PreGameTimer {
 
 
                 } else {
+                    new RedBlueTeam(main).addToTeams();
                     new PlayerUtils(main).giveMinigameItems();
                     Bukkit.broadcastMessage(new ChatUtils(main).prefix + "The game has now started!");
                     cancel();
