@@ -1,8 +1,11 @@
 package me.gram.underwaterffa;
 
 import me.gram.underwaterffa.Listener.MGListener;
+import me.gram.underwaterffa.Listener.players.DamageEvent;
+import me.gram.underwaterffa.Listener.players.InventoryEvent;
 import me.gram.underwaterffa.Listener.players.PlayerJoin;
 import me.gram.underwaterffa.Listener.players.SwimListener;
+import me.gram.underwaterffa.Teams.SpawnPoints;
 import me.gram.underwaterffa.Teams.RedBlueTeam;
 import me.gram.underwaterffa.commands.StartCommand;
 import me.gram.underwaterffa.commands.StopCommand;
@@ -13,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public final class UnderwaterFFA extends JavaPlugin{
@@ -42,10 +46,10 @@ public final class UnderwaterFFA extends JavaPlugin{
     public ArrayList<Player> alive = new ArrayList<>();
     public ArrayList<Player> spectating = new ArrayList<>();
     public ArrayList<Player> vanished = new ArrayList<>();
-
-
     @Override
     public void onEnable() {
+        loadConfig();
+        saveDefaultConfig();
         setGamestate(GameState.LOBBY);
         registerCommands();
         registerEvents();
@@ -60,6 +64,7 @@ public final class UnderwaterFFA extends JavaPlugin{
         getCommand("Start").setExecutor(new StartCommand(this));
         getCommand("stop").setExecutor(new StopCommand(this));
         getCommand("v").setExecutor(new Vanish(this));
+        getCommand("spawnpoint").setExecutor(new SpawnPoints(this));
     }
 
     private void registerEvents(){
@@ -67,6 +72,13 @@ public final class UnderwaterFFA extends JavaPlugin{
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new MGListener(this), this);
         pm.registerEvents(new SwimListener(this), this);
+        pm.registerEvents(new DamageEvent(this), this);
+        pm.registerEvents(new InventoryEvent(this),this );
+    }
+
+    private void loadConfig(){
+        getConfig().options().copyDefaults(false);
+        saveConfig();
     }
 
 }

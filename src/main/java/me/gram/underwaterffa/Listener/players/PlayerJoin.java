@@ -24,7 +24,7 @@ public class PlayerJoin implements Listener {
         event.setJoinMessage("");
         new PlayerManager(main).handle(p);
 
-        if (Bukkit.getOnlinePlayers().size() >= 2) {
+        if (Bukkit.getOnlinePlayers().size() >= 3) {
             new PreGameTimer(main).startCountdown();
         } else if (main.getGamestate() == GameState.LOBBY) {
             return;

@@ -3,9 +3,7 @@ package me.gram.underwaterffa.Teams;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.Utils.ItemBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -31,16 +29,22 @@ public class RedBlueTeam {
     public void addToTeam(Player player) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (blueTeam.size() <= redTeam.size()) {
-                blueTeam.add(p.toString());
+                blueTeam.add(p.getName());
                 player.sendMessage(new ChatUtils(main).prefix
                         + "You've  been added to the " + new ChatUtils(main).format("&9BLUE ") + new ChatUtils(main).format("&eteam!"));
-                p.getInventory().setHelmet(new ItemBuilder(main).Builditem(Material.BLUE_WOOL, 1));
+                p.getInventory().setHelmet(new ItemBuilder(Material.BLUE_WOOL).toItemStack());
+                p.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).toItemStack());
+                p.setDisplayName(ChatColor.BLUE + p.getName());
+                p.setPlayerListName(ChatColor.BLUE + p.getName());
                 break;
             }else{
-                redTeam.add(player.toString());
+                redTeam.add(player.getName());
                 player.sendMessage(new ChatUtils(main).prefix
                         + "You've  been added to the " + new ChatUtils(main).format("&cRED ") + new ChatUtils(main).format("&eteam!"));
-                player.getInventory().setHelmet(new ItemBuilder(main).Builditem(Material.RED_WOOL, 1));
+                p.getInventory().setHelmet(new ItemBuilder(Material.RED_WOOL).toItemStack());
+                p.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).toItemStack());
+                player.setDisplayName(ChatColor.RED + player.getName());
+                player.setPlayerListName(ChatColor.RED + player.getName());
                 break;
             }
 

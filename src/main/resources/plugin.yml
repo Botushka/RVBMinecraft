@@ -10,3 +10,5 @@ commands:
     description: stop the UnderwaterFFA minigame
   v:
     description: go invisible
+  spawnpoint:
+    description: set red spawn

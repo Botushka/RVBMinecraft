@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import static org.bukkit.enchantments.Enchantment.DEPTH_STRIDER;
 
 
 public class PlayerUtils{
@@ -29,10 +30,10 @@ public class PlayerUtils{
 }
 
     public void giveMinigameItem(Player player){
-        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.IRON_SWORD, 1));
-        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.BOW, 1));
-        player.getInventory().addItem(new ItemBuilder(main).Builditem(Material.ARROW, 16));
-        player.getInventory().setBoots(new ItemBuilder(main).BuildArmor(Material.LEATHER_BOOTS, Enchantment.DEPTH_STRIDER, 1));
+        player.getInventory().addItem(new ItemBuilder(Material.IRON_SWORD).toItemStack());
+        player.getInventory().addItem(new ItemBuilder(Material.BOW).toItemStack());
+        player.getInventory().addItem(new ItemBuilder(Material.ARROW, 3).toItemStack());
+        player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).addEnchant(DEPTH_STRIDER, 1).toItemStack());
         player.addPotionEffect(NV);
         player.addPotionEffect(Dolphin);
     }

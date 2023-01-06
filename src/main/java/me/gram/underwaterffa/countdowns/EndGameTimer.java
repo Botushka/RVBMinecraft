@@ -5,6 +5,8 @@ import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.Utils.PlayerUtils;
 import me.gram.underwaterffa.states.GameState;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EndGameTimer {
