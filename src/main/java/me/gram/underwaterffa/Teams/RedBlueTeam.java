@@ -5,6 +5,9 @@ import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.Utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;

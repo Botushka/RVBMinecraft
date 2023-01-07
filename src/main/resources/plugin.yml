@@ -12,3 +12,11 @@ commands:
     description: go invisible
   spawnpoint:
     description: set red spawn
+  blue:
+    description: set spawn point for blue
+  red:
+    description: set spawn point for red
+  gametools:
+    description: get FFA minigame setup tools
+  test:
+    description: ignore this
