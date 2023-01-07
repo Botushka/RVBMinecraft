@@ -20,3 +20,5 @@ commands:
     description: get FFA minigame setup tools
   test:
     description: ignore this
+  teamcheck:
+    description: test which team you are in

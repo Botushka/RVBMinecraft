@@ -2,7 +2,6 @@ package me.gram.underwaterffa.Teams;
 
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
-import me.gram.underwaterffa.Utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 
@@ -23,17 +23,18 @@ public class SpawnPoints implements CommandExecutor, Listener {
 
     private final String SET_BLUE_SPAWN = new ChatUtils(main).format("&aSet &9Blue &aspawn point &7(Right Click)");
     private final String SET_RED_SPAWN = new ChatUtils(main).format("&aSet &cRed &aspawn point &7(Right Click)");
+    private final String SET_SPECTATOR_SPAWN = new ChatUtils(main).format("&aSet &7Spectator &aspawn point &7(Right Click)");
 
 
     String Red = "RedSpawn";
     String Blue = "BlueSpawn";
+    String Spectator = "SpectatorSpawn";
 
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            Location loc = p.getLocation();
             if (main.getConfig().getBoolean("enable")) {
                 if (args.length == 1 && args[0].equalsIgnoreCase("red")) {
                     if (!sender.hasPermission("red.spawn")) {
@@ -70,7 +71,11 @@ public class SpawnPoints implements CommandExecutor, Listener {
         }else if(itemname.equalsIgnoreCase(SET_RED_SPAWN)){
             redSaveLocation(player);
 
-        }else{
+        }else if(itemname.equalsIgnoreCase(SET_SPECTATOR_SPAWN)){
+            specSaveLocation(player);
+        }
+
+        else{
             return;
         }
         event.setCancelled(true);
@@ -102,31 +107,54 @@ public class SpawnPoints implements CommandExecutor, Listener {
         player.sendMessage(new ChatUtils(main).format("&aYou have set up spawn point for &9BLUE &ateam"));
     }
 
-    public void teleportBlueSpawn(Player player){
-
-        if(main.getConfig().isConfigurationSection("savedlocations." + Blue)){
-            Location blue_spawn = new Location(player.getWorld(), main.getConfig().getDouble("savedlocations." + Blue + ".x"),
-                    main.getConfig().getDouble("savedlocations." + Blue +  ".y"),
-                    main.getConfig().getDouble("savedlocations." + Blue + ".z"),
-                    (float) main.getConfig().getDouble("savedlocations." + Blue + ".yaw"),
-                    (float) main.getConfig().getDouble("savedlocations." + Blue + ".pitch")
-            );
-                    player.teleport(blue_spawn);
-
-        }
+    public void specSaveLocation(Player player){
+        Location loc = player.getLocation();
+        main.getConfig().createSection("savedlocations." + Spectator);
+        main.getConfig().set("savedlocations." + Spectator + ".world", loc.getWorld());
+        main.getConfig().set("savedlocations." + Spectator + ".x", loc.getX());
+        main.getConfig().set("savedlocations." + Spectator + ".y", loc.getY());
+        main.getConfig().set("savedlocations." + Spectator + ".z", loc.getZ());
+        main.getConfig().set("savedlocations." + Spectator + ".pitch", loc.getPitch());
+        main.getConfig().set("savedlocations." + Spectator + ".yaw", loc.getYaw());
+        main.saveConfig();
+        player.sendMessage(new ChatUtils(main).format("&aYou have set up spawn point for &7Spectators"));
     }
 
-    public void teleportRedSpawn(Player player) {
+    public Location teleportSpectatorSpawn(Player player){
 
-        if (main.getConfig().isConfigurationSection("savedlocations." + Red)) {
-            Location red_spawn = new Location(player.getWorld(), main.getConfig().getDouble("savedlocations." + Red + ".x"),
-                    main.getConfig().getDouble("savedlocations." + Red + ".y"),
-                    main.getConfig().getDouble("savedlocations." + Red + ".z"),
-                    (float) main.getConfig().getDouble("savedlocations." + Red + ".yaw"),
-                    (float) main.getConfig().getDouble("savedlocations." + Red + ".pitch")
-            );
-            player.teleport(red_spawn);
-
-        }
+        main.getConfig().isConfigurationSection("savedlocations." + Spectator);
+        Location spec_spawn = new Location(player.getWorld(), main.getConfig().getDouble("savedlocations." + Spectator + ".x"),
+                main.getConfig().getDouble("savedlocations." + Spectator + ".y"),
+                main.getConfig().getDouble("savedlocations." + Spectator + ".z"),
+                (float) main.getConfig().getDouble("savedlocations." + Spectator + ".yaw"),
+                (float) main.getConfig().getDouble("savedlocations." + Spectator + ".pitch"));
+                player.teleport(spec_spawn);
+                return spec_spawn;
     }
+
+    public Location teleportBlueSpawn(Player player){
+
+        main.getConfig().isConfigurationSection("savedlocations." + Blue);
+        Location blue_spawn = new Location(player.getWorld(), main.getConfig().getDouble("savedlocations." + Blue + ".x"),
+                main.getConfig().getDouble("savedlocations." + Blue + ".y"),
+                main.getConfig().getDouble("savedlocations." + Blue + ".z"),
+                (float) main.getConfig().getDouble("savedlocations." + Blue + ".yaw"),
+                (float) main.getConfig().getDouble("savedlocations." + Blue + ".pitch"));
+                player.teleport(blue_spawn);
+                return blue_spawn;
+    }
+
+    public Location teleportRedSpawn(Player player) {
+
+        main.getConfig().isConfigurationSection("savedlocations." + Red);
+        Location red_spawn = new Location(player.getWorld(), main.getConfig().getDouble("savedlocations." + Red + ".x"),
+                main.getConfig().getDouble("savedlocations." + Red + ".y"),
+                main.getConfig().getDouble("savedlocations." + Red + ".z"),
+                (float) main.getConfig().getDouble("savedlocations." + Red + ".yaw"),
+                (float) main.getConfig().getDouble("savedlocations." + Red + ".pitch"));
+                player.teleport(red_spawn);
+                return red_spawn;
+    }
+
+
 }

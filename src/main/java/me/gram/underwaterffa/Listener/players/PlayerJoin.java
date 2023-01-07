@@ -2,6 +2,7 @@ package me.gram.underwaterffa.Listener.players;
 
 
 import me.gram.underwaterffa.Handler.PlayerManager;
+import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.countdowns.PreGameTimer;
 import me.gram.underwaterffa.states.GameState;
@@ -23,8 +24,8 @@ public class PlayerJoin implements Listener {
         Player p = event.getPlayer();
         event.setJoinMessage("");
         new PlayerManager(main).handle(p);
-
-        if (Bukkit.getOnlinePlayers().size() >= 3) {
+        new ScoreboardTeams(main).createBoard(p);
+        if (Bukkit.getOnlinePlayers().size() >= 16) {
             new PreGameTimer(main).startCountdown();
         } else if (main.getGamestate() == GameState.LOBBY) {
             return;

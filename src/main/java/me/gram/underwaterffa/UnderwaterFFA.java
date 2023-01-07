@@ -2,36 +2,49 @@ package me.gram.underwaterffa;
 
 import me.gram.underwaterffa.Listener.MGListener;
 import me.gram.underwaterffa.Listener.players.DamageEvent;
-import me.gram.underwaterffa.Listener.players.InventoryEvent;
+import me.gram.underwaterffa.Listener.players.ReSpawnEvent;
 import me.gram.underwaterffa.Listener.players.PlayerJoin;
 import me.gram.underwaterffa.Listener.players.SwimListener;
+import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.Teams.SpawnPoints;
 import me.gram.underwaterffa.Teams.RedBlueTeam;
+import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.commands.*;
 import me.gram.underwaterffa.states.GameState;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.*;
+
 import java.util.ArrayList;
 
-public final class UnderwaterFFA extends JavaPlugin{
-    /**UNFINISHED
-     *
-     * TODO: FFA UNDER WATER
+public class UnderwaterFFA extends JavaPlugin {
+    /**
+     * UNFINISHED
+     * <p>
+     * TODO/PLAN FFA UNDER WATER
      * minigame one hit dead, bow(or raygun),sword,
      * fast af swimming, unlimited breathing, random spawn location after death
      * cool underwater map
+     * players name team color in killfeed
      * Killstreaks
      * Teams
      * Blue vs Red scoreboard 100kills to win
      * Ability to set spawns (waiting lobby) Blue and Red team spawns
      * Database
      */
-
     private GameState gamestates;
+
     public GameState getGamestate() {
         return gamestates;
     }
+
     public void setGamestate(GameState gamestate) {
         this.gamestates = gamestate;
     }
@@ -40,8 +53,6 @@ public final class UnderwaterFFA extends JavaPlugin{
     public ArrayList<Player> spectating = new ArrayList<>();
     public ArrayList<Player> vanished = new ArrayList<>();
 
-
-
     @Override
     public void onEnable() {
         loadConfig();
@@ -49,23 +60,25 @@ public final class UnderwaterFFA extends JavaPlugin{
         setGamestate(GameState.LOBBY);
         registerCommands();
         registerEvents();
+
     }
 
     @Override
-    public void onDisable(){
+    public void onDisable() {
         new RedBlueTeam(this).clearTeams();
     }
 
-    private void registerCommands(){
+    private void registerCommands() {
         getCommand("Start").setExecutor(new StartCommand(this));
         getCommand("stop").setExecutor(new StopCommand(this));
         getCommand("v").setExecutor(new Vanish(this));
         getCommand("spawnpoint").setExecutor(new SpawnPoints(this));
         getCommand("gametools").setExecutor(new admintools(this));
         getCommand("test").setExecutor(new test(this));
+        getCommand("teamcheck").setExecutor(new teamcheck(this));
     }
 
-    private void registerEvents(){
+    private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new MGListener(this), this);
@@ -73,11 +86,14 @@ public final class UnderwaterFFA extends JavaPlugin{
         pm.registerEvents(new DamageEvent(this), this);
         //pm.registerEvents(new InventoryEvent(this),this ); !remember to add this back //
         pm.registerEvents(new SpawnPoints(this), this);
+        pm.registerEvents(new RedBlueTeam(this), this);
+        pm.registerEvents(new ReSpawnEvent(this), this);
     }
 
-    private void loadConfig(){
+    private void loadConfig() {
         getConfig().options().copyDefaults(true);
         saveConfig();
     }
+
 
 }

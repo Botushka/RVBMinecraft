@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 
 public class admintools implements CommandExecutor {
@@ -17,6 +18,7 @@ public class admintools implements CommandExecutor {
     }
     private final String SET_BLUE_SPAWN = new ChatUtils(main).format("&aSet &9Blue &aspawn point &7(Right Click)");
     private final String SET_RED_SPAWN = new ChatUtils(main).format("&aSet &cRed &aspawn point &7(Right Click)");
+    private final String SET_SPECTATOR_SPAWN = new ChatUtils(main).format("&aSet &7Spectator &aspawn point &7(Right Click)");
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     Player p = (Player) sender;
@@ -34,7 +36,11 @@ public class admintools implements CommandExecutor {
                                 .setName(SET_RED_SPAWN)
                                 .setLore("Make sure to look at the direction you want players to look when they spawn")
                                 .toItemStack());
-
+                p.getInventory().addItem(
+                        new ItemBuilder(Material.WHITE_WOOL)
+                                .setName(SET_SPECTATOR_SPAWN)
+                                .setLore("Make sure to look at the direction you want players to look when they spawn")
+                                .toItemStack());
             }
 
         }

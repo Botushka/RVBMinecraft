@@ -5,14 +5,12 @@ import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.Utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RedBlueTeam {
+public class RedBlueTeam implements Listener {
 
     private UnderwaterFFA main;
 
@@ -20,10 +18,10 @@ public class RedBlueTeam {
         this.main = main;
     }
 
-    public List<String> redTeam = new ArrayList<>();
+    public static List<String> redTeam = new ArrayList<String>();
 
 
-    public List<String> blueTeam = new ArrayList<>();
+    public static List<String> blueTeam = new ArrayList<String>();
 
     public void addToTeams() {
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::addToTeam);
@@ -32,26 +30,29 @@ public class RedBlueTeam {
     public void addToTeam(Player player) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (blueTeam.size() <= redTeam.size()) {
-                blueTeam.add(p.getName());
+
+                blueTeam.add(player.getName());
                 player.sendMessage(new ChatUtils(main).prefix
                         + "You've  been added to the " + new ChatUtils(main).format("&9BLUE ") + new ChatUtils(main).format("&eteam!"));
-                p.getInventory().setHelmet(new ItemBuilder(Material.BLUE_WOOL).toItemStack());
-                p.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).toItemStack());
-                p.setDisplayName(ChatColor.BLUE + p.getName());
-                p.setPlayerListName(ChatColor.BLUE + p.getName());
+                player.getInventory().setHelmet(new ItemBuilder(Material.BLUE_WOOL).toItemStack());
+                player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).setLeatherArmorColor(Color.BLUE).toItemStack());
+                player.setDisplayName(new ChatUtils(main).format("&9[BLUE] " + player.getName()));
+                player.setPlayerListName(new ChatUtils(main).format("&9[BLUE] " + player.getName()));
                 break;
-            }else{
+            } else {
                 redTeam.add(player.getName());
                 player.sendMessage(new ChatUtils(main).prefix
                         + "You've  been added to the " + new ChatUtils(main).format("&cRED ") + new ChatUtils(main).format("&eteam!"));
-                p.getInventory().setHelmet(new ItemBuilder(Material.RED_WOOL).toItemStack());
-                p.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).toItemStack());
-                player.setDisplayName(ChatColor.RED + player.getName());
-                player.setPlayerListName(ChatColor.RED + player.getName());
+                player.getInventory().setHelmet(new ItemBuilder(Material.RED_WOOL).toItemStack());
+                player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).setLeatherArmorColor(Color.RED).toItemStack());
+                player.setDisplayName(new ChatUtils(main).format("&c[RED] " + player.getName()));
+                player.setPlayerListName(new ChatUtils(main).format("&c[RED] " + player.getName()));
                 break;
             }
 
+
         }
+
     }
 
     public void clearTeams(){
@@ -59,9 +60,17 @@ public class RedBlueTeam {
         blueTeam.clear();
     }
 
+
     public boolean isInTeam(Player player){
         return redTeam.contains(player.getName()) ||
                 blueTeam.contains(player.getName());
+    }
+
+    public boolean isInRed(Player player){
+        return redTeam.contains(player.getName());
+    }
+    public boolean isInBlue(Player player){
+        return blueTeam.contains(player.getName());
     }
     public List<String> getRedTeam(){
         return redTeam;

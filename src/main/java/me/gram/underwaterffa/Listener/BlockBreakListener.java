@@ -1,5 +1,6 @@
 package me.gram.underwaterffa.Listener;
 
+import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.states.GameManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,8 +10,10 @@ public class BlockBreakListener implements Listener {
 
     private GameManager gameManager;
 
-    public BlockBreakListener(GameManager gameManager){
-        this.gameManager = gameManager;
+    private UnderwaterFFA main;
+
+    public BlockBreakListener(UnderwaterFFA main) {
+        this.main = main;
     }
 
     @EventHandler

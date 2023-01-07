@@ -46,7 +46,7 @@ public class PreGameTimer {
                     }
                     if (number == 1) {
                         Bukkit.broadcastMessage(new ChatUtils(main).prefix + "Game starting in 1 second.");
-                        // DO PREGAME THINGS, SCATTER, KITS, ETC
+
 
                     }
                     number--;
