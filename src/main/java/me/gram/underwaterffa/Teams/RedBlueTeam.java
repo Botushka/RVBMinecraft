@@ -69,6 +69,8 @@ public class RedBlueTeam implements Listener {
     public boolean isInRed(Player player){
         return redTeam.contains(player.getName());
     }
+
+
     public boolean isInBlue(Player player){
         return blueTeam.contains(player.getName());
     }

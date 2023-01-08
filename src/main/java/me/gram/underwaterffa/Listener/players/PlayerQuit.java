@@ -2,12 +2,15 @@ package me.gram.underwaterffa.Listener.players;
 
 import me.gram.underwaterffa.Handler.Game;
 import me.gram.underwaterffa.Teams.RedBlueTeam;
+import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.Score;
 
 public class PlayerQuit{
 
@@ -27,11 +30,14 @@ public class PlayerQuit{
                     + "You have been removed from the " + new ChatUtils(main).format("&9BLUE ") +
                     new ChatUtils(main).format("&eteam! Reason: Disconnecting"));
         }
-        if(new RedBlueTeam(main).blueTeam.contains(p.getName())){
+        if(new RedBlueTeam(main).blueTeam.contains(p.getName())) {
             new RedBlueTeam(main).blueTeam.remove(p.getName());
             p.sendMessage(new ChatUtils(main).prefix
                     + "You have been removed from the " + new ChatUtils(main).format("&cRED ") +
                     new ChatUtils(main).format("&eteam! Reason: Disconnecting"));
+        }
+        for(Player player : Bukkit.getOnlinePlayers()){
+            new ScoreboardTeams(main).updateScoreBoard(player);
         }
     }
 }
