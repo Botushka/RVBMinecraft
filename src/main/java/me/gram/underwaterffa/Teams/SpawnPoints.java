@@ -143,7 +143,19 @@ public class SpawnPoints implements CommandExecutor, Listener {
                 player.teleport(blue_spawn);
                 return blue_spawn;
     }
-
+    public void teleportTeam() {
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::teleportTeams);
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::teleportTeams);
+    }
+    public Location teleportTeams(Player player){
+        if(new RedBlueTeam(main).isInRed(player)){
+            return teleportRedSpawn(player);
+        }else if(new RedBlueTeam(main).isInBlue(player)){
+            return teleportBlueSpawn(player);
+        }else {
+            return teleportSpectatorSpawn(player);
+        }
+    }
     public Location teleportRedSpawn(Player player) {
 
         main.getConfig().isConfigurationSection("savedlocations." + Red);

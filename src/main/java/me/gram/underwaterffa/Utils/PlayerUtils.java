@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -13,11 +14,14 @@ import static org.bukkit.enchantments.Enchantment.DEPTH_STRIDER;
 
 
 public class PlayerUtils{
+
     private ItemBuilder items;
     private UnderwaterFFA main;
+    public final String ROCKET_LAUNCHER = new ChatUtils(main).format("&6ROCKET LAUNCHER");
     public PlayerUtils(UnderwaterFFA main) {
         this.main = main;
     }
+
 
     /** PLAYER UTILS**/
     PotionEffect Dolphin = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 10);
@@ -34,6 +38,7 @@ public class PlayerUtils{
         player.getInventory().addItem(new ItemBuilder(Material.BOW).toItemStack());
         player.getInventory().addItem(new ItemBuilder(Material.ARROW, 3).toItemStack());
         player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS).addEnchant(DEPTH_STRIDER, 1).toItemStack());
+        player.getInventory().addItem(new ItemBuilder(Material.DIAMOND_HOE).setName(ROCKET_LAUNCHER).toItemStack());
         player.addPotionEffect(NV);
         player.addPotionEffect(Dolphin);
     }

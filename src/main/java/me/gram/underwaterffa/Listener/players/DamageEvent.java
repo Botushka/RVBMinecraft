@@ -4,11 +4,6 @@ import me.gram.underwaterffa.Teams.RedBlueTeam;
 import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.ChatUtils;
-import me.gram.underwaterffa.Utils.PlayerUtils;
-import me.gram.underwaterffa.states.GameState;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.Score;
 
 import static me.gram.underwaterffa.Teams.ScoreboardTeams.*;
 
@@ -65,6 +57,7 @@ public class DamageEvent implements Listener {
     @EventHandler
     public void onKill(PlayerDeathEvent e)
     {
+
         Player player = e.getEntity();
         String killed = e.getEntity().getName();
         String killer = e.getEntity().getKiller().getName();
@@ -79,9 +72,16 @@ public class DamageEvent implements Listener {
     }
 
     @EventHandler
-    public void onBowDamage(ProjectileHitEvent e){
+    public boolean onBowDamage(ProjectileHitEvent e){
         Player player = (Player) e.getHitEntity();
-        player.damage(player.getHealth());
+        if(e.getHitEntity() instanceof Player){
+            player.damage(player.getHealth());
+        }else{
+            return false;
+        }
+
+
+       return false;
     }
     @EventHandler
     public void foodChange(FoodLevelChangeEvent event){

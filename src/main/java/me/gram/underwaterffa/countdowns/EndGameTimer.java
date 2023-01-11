@@ -33,7 +33,7 @@ public class EndGameTimer {
                     number--;
                 } else {
                     main.setGamestate(GameState.LOBBY);
-                    Bukkit.broadcastMessage("GameState: Lobby");
+                    Bukkit.broadcastMessage(new ChatUtils(main).format("&aYou were added into minigame lobby"));
                     cancel();
                 }
             }

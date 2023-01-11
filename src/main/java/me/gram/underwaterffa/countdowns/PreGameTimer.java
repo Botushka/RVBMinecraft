@@ -57,6 +57,7 @@ public class PreGameTimer {
                 } else {
                     new RedBlueTeam(main).addToTeams();
                     new PlayerUtils(main).giveMinigameItems();
+                    new SpawnPoints(main).teleportTeam();
                     main.setGamestate(GameState.INGAME);
                     Bukkit.broadcastMessage(new ChatUtils(main).prefix + "The game has now started!");
                     cancel();

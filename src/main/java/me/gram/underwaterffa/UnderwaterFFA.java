@@ -1,10 +1,7 @@
 package me.gram.underwaterffa;
 
 import me.gram.underwaterffa.Listener.MGListener;
-import me.gram.underwaterffa.Listener.players.DamageEvent;
-import me.gram.underwaterffa.Listener.players.ReSpawnEvent;
-import me.gram.underwaterffa.Listener.players.PlayerJoin;
-import me.gram.underwaterffa.Listener.players.SwimListener;
+import me.gram.underwaterffa.Listener.players.*;
 import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.Teams.SpawnPoints;
 import me.gram.underwaterffa.Teams.RedBlueTeam;
@@ -28,16 +25,12 @@ public class UnderwaterFFA extends JavaPlugin {
     /**
      * UNFINISHED
      * <p>
-     * TODO/PLAN FFA UNDER WATER
-     * minigame one hit dead, bow(or raygun),sword,
-     * fast af swimming, unlimited breathing, random spawn location after death
-     * cool underwater map
-     * players name team color in killfeed
-     * Killstreaks
-     * Teams
-     * Blue vs Red scoreboard 100kills to win
-     * Ability to set spawns (waiting lobby) Blue and Red team spawns
-     * Database
+     *TODO:
+     * Fix killfeed
+     * FIx Team chat messages
+     * Fix Death/Kill counter
+     * Do: when team hearts 0 team loses
+     * Done!
      */
     private GameState gamestates;
 
@@ -84,7 +77,7 @@ public class UnderwaterFFA extends JavaPlugin {
         pm.registerEvents(new MGListener(this), this);
         pm.registerEvents(new SwimListener(this), this);
         pm.registerEvents(new DamageEvent(this), this);
-        //pm.registerEvents(new InventoryEvent(this),this ); !remember to add this back //
+        pm.registerEvents(new InventoryEvent(this),this );
         pm.registerEvents(new SpawnPoints(this), this);
         pm.registerEvents(new RedBlueTeam(this), this);
         pm.registerEvents(new ReSpawnEvent(this), this);
