@@ -3,7 +3,6 @@ package me.gram.underwaterffa.Listener.players;
 
 import me.gram.underwaterffa.Teams.SpawnPoints;
 import me.gram.underwaterffa.UnderwaterFFA;
-import me.gram.underwaterffa.states.GameState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

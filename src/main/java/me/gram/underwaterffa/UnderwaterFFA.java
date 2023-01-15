@@ -2,22 +2,13 @@ package me.gram.underwaterffa;
 
 import me.gram.underwaterffa.Listener.MGListener;
 import me.gram.underwaterffa.Listener.players.*;
-import me.gram.underwaterffa.Teams.ScoreboardTeams;
 import me.gram.underwaterffa.Teams.SpawnPoints;
 import me.gram.underwaterffa.Teams.RedBlueTeam;
-import me.gram.underwaterffa.Utils.ChatUtils;
 import me.gram.underwaterffa.commands.*;
 import me.gram.underwaterffa.states.GameState;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.*;
 
 import java.util.ArrayList;
 
@@ -30,6 +21,7 @@ public class UnderwaterFFA extends JavaPlugin {
      * FIx Team chat messages
      * Fix Death/Kill counter
      * Do: when team hearts 0 team loses
+     * Do: Rocket launcher cooldown
      * Done!
      */
     private GameState gamestates;
@@ -45,7 +37,6 @@ public class UnderwaterFFA extends JavaPlugin {
     public ArrayList<Player> alive = new ArrayList<>();
     public ArrayList<Player> spectating = new ArrayList<>();
     public ArrayList<Player> vanished = new ArrayList<>();
-
     @Override
     public void onEnable() {
         loadConfig();
@@ -55,22 +46,18 @@ public class UnderwaterFFA extends JavaPlugin {
         registerEvents();
 
     }
-
     @Override
     public void onDisable() {
         new RedBlueTeam(this).clearTeams();
     }
-
     private void registerCommands() {
         getCommand("Start").setExecutor(new StartCommand(this));
         getCommand("stop").setExecutor(new StopCommand(this));
         getCommand("v").setExecutor(new Vanish(this));
         getCommand("spawnpoint").setExecutor(new SpawnPoints(this));
         getCommand("gametools").setExecutor(new admintools(this));
-        getCommand("test").setExecutor(new test(this));
         getCommand("teamcheck").setExecutor(new teamcheck(this));
     }
-
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerJoin(this), this);
@@ -82,11 +69,8 @@ public class UnderwaterFFA extends JavaPlugin {
         pm.registerEvents(new RedBlueTeam(this), this);
         pm.registerEvents(new ReSpawnEvent(this), this);
     }
-
     private void loadConfig() {
         getConfig().options().copyDefaults(true);
         saveConfig();
     }
-
-
 }

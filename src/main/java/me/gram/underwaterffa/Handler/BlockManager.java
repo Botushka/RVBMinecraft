@@ -15,9 +15,7 @@ public class BlockManager implements Listener {
 
     allowedToBreak.add(Material.OAK_LEAVES);
 }
-
     private Set<Material> allowedToBreak = new HashSet<>();
-
     public boolean canBreak(Block block){
         return allowedToBreak.contains(block.getType());
     }

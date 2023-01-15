@@ -32,7 +32,6 @@ public class Vanish implements CommandExecutor{
             player.sendMessage(new ChatUtils(main).prefix + "You have been un-vanished.");
         }
     }
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         Player p = (Player) sender;

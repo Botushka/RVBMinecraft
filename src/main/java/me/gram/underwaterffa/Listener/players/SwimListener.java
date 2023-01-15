@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityAirChangeEvent;
 import org.bukkit.event.entity.EntityExhaustionEvent;
-import org.bukkit.scoreboard.Score;
+
 
 public class SwimListener implements Listener {
 

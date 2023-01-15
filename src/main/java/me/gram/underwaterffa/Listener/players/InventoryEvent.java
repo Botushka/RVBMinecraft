@@ -3,7 +3,6 @@ package me.gram.underwaterffa.Listener.players;
 import me.gram.underwaterffa.UnderwaterFFA;
 import me.gram.underwaterffa.Utils.PlayerUtils;
 import org.bukkit.Location;
-import org.bukkit.block.data.type.Fire;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.util.Vector;
+
 
 public class InventoryEvent implements Listener {
     private UnderwaterFFA main;

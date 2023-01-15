@@ -1,7 +1,6 @@
 package me.gram.underwaterffa.Utils;
 
 import me.gram.underwaterffa.UnderwaterFFA;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;

@@ -26,7 +26,6 @@ public class RedBlueTeam implements Listener {
     public void addToTeams() {
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::addToTeam);
     }
-
     public void addToTeam(Player player) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (blueTeam.size() <= redTeam.size()) {
@@ -49,28 +48,20 @@ public class RedBlueTeam implements Listener {
                 player.setPlayerListName(new ChatUtils(main).format("&c[RED] " + player.getName()));
                 break;
             }
-
-
         }
-
     }
 
     public void clearTeams(){
         redTeam.clear();
         blueTeam.clear();
     }
-
-
     public boolean isInTeam(Player player){
         return redTeam.contains(player.getName()) ||
                 blueTeam.contains(player.getName());
     }
-
     public boolean isInRed(Player player){
         return redTeam.contains(player.getName());
     }
-
-
     public boolean isInBlue(Player player){
         return blueTeam.contains(player.getName());
     }
@@ -81,5 +72,4 @@ public class RedBlueTeam implements Listener {
     public List<String> getBlueTeam(){
         return blueTeam;
     }
-
 }

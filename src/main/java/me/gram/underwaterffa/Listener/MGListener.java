@@ -1,9 +1,7 @@
 package me.gram.underwaterffa.Listener;
 
 import me.gram.underwaterffa.UnderwaterFFA;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 
 public class MGListener implements Listener {
 
