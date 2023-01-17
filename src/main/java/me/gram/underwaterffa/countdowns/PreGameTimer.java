@@ -51,7 +51,7 @@ public class PreGameTimer {
 
                     }
                     number--;
-
+                //Start the game and game setup
 
                 } else {
                     new RedBlueTeam(main).addToTeams();

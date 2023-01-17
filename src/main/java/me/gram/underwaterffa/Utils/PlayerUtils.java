@@ -22,8 +22,8 @@ public class PlayerUtils{
 
 
     /** PLAYER UTILS**/
-    PotionEffect Dolphin = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 10);
-    PotionEffect NV = new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 10);
+   public  PotionEffect Dolphin = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 10);
+   public  PotionEffect NV = new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 10);
     public void giveMinigameItems(){
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.SURVIVAL).forEach(this::giveMinigameItem);
         Bukkit.getOnlinePlayers().stream().filter(player -> player.getGameMode() == GameMode.CREATIVE).forEach(this::giveMinigameItem);

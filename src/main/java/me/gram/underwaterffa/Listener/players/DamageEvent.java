@@ -33,55 +33,63 @@ public class DamageEvent implements Listener {
             if(e.getDamager() instanceof Player){
                 Player damager = (Player) e.getDamager();
                 Player player =  (Player) e.getEntity();
-                player.damage(player.getHealth());
-                if(new RedBlueTeam(main).isInRed(player)){
-                    redScore = redScore -1;
+                player.damage(10);
 
-                }else if(new RedBlueTeam(main).isInBlue(player)){
-                    blueScore = blueScore - 1;
-                }
-                else{
-                    new ScoreboardTeams(main).updateScoreBoard(player);
+            }
+        }
+    }
+    @EventHandler
+    public void teamDamage(EntityDamageByEntityEvent e){
+        if(e.getEntity().getType().equals(EntityType.PLAYER)){
+            if(e.getDamager() instanceof Player){
+                Player damager = (Player) e.getDamager();
+                Player player =  (Player) e.getEntity();
+                if(new RedBlueTeam(main).isInRed(damager) && new RedBlueTeam(main).isInRed(player)){
+                    e.setCancelled(true);
+                    player.sendMessage("You can't attack your own teammates!");
+                } else if (new RedBlueTeam(main).isInBlue(damager) && new RedBlueTeam(main).isInBlue(player)) {
+                    {e.setCancelled(true); player.sendMessage("You can't attack your own teammates!");}
                 }
 
-                if(damager instanceof Player){
-                    new ScoreboardTeams(main).updateScoreBoard(damager);
-                    addKill(damager, 1);
-                }
-                new ScoreboardTeams(main).updateScoreBoard(player);
             }
         }
     }
 
-
     @EventHandler
     public void onKill(PlayerDeathEvent e)
     {
-
         Player player = e.getEntity();
         String killed = e.getEntity().getName();
         String killer = e.getEntity().getKiller().getName();
         if(new RedBlueTeam(main).isInRed(player)){
-            e.setDeathMessage(new ChatUtils(main).format("&9[BLUE] " + killed +  "&7 was killed by " + "&c[RED] " + killer));
-        }else if(new RedBlueTeam(main).isInBlue(player)){
             e.setDeathMessage(new ChatUtils(main).format("&c[RED] " + killed + "&7 was killed by " + "&9[BLUE] " + killer));
+            redScore = redScore - 1;
+        }else if(new RedBlueTeam(main).isInBlue(player)){
+            blueScore = blueScore - 1;
+            e.setDeathMessage(new ChatUtils(main).format("&9[BLUE] " + killed +  "&7 was killed by " + "&c[RED] " + killer));
         }else{
             e.setDeathMessage(new ChatUtils(main).format("&7" + killed + " was killed by " + killer));
         }
-
+        new ScoreboardTeams(main).updateScoreBoard(player);
     }
 
     @EventHandler
-    public boolean onBowDamage(ProjectileHitEvent e){
+    public boolean onProjectile(ProjectileHitEvent e){
         Player player = (Player) e.getHitEntity();
-        if(e.getHitEntity() instanceof Player){
-            player.damage(player.getHealth());
-        }else{
-            return false;
+        Player damager = (Player) e.getEntity();
+        if(e.getHitEntity() instanceof Player) {
+            if (new RedBlueTeam(main).isInRed(damager) && new RedBlueTeam(main).isInRed(player)) {
+                e.setCancelled(true);
+                damager.sendMessage("You can't attack your own teammates!");
+            }
+            else if (new RedBlueTeam(main).isInBlue(damager) && new RedBlueTeam(main).isInBlue(player)) {
+                {e.setCancelled(true);
+                    damager.sendMessage("You can't attack your own teammates!");
+                }
+            }else{player.damage(player.getHealth());}
         }
 
-
-       return false;
+       return true;
     }
     @EventHandler
     public void foodChange(FoodLevelChangeEvent event){
