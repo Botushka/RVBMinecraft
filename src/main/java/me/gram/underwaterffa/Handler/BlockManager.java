@@ -1,5 +1,4 @@
 package me.gram.underwaterffa.Handler;
-import me.gram.underwaterffa.states.GameManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.Listener;

@@ -26,7 +26,7 @@ public class EndGameTimer {
                     if (number == 10) {
                         main.setGamestate(GameState.ENDGAME);
                         new PlayerUtils(main).removeItems();
-                        Bukkit.broadcastMessage(new ChatUtils(main).prefix + "(Team) won!");
+                        Bukkit.broadcastMessage(new ChatUtils(main).prefix + "(Team) won!"); //TODO: add winner team
                         new RedBlueTeam(main).clearTeams();
                     }
 

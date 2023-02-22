@@ -1,7 +1,6 @@
 package me.gram.underwaterffa.Listener;
 
 import me.gram.underwaterffa.UnderwaterFFA;
-import me.gram.underwaterffa.states.GameManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
