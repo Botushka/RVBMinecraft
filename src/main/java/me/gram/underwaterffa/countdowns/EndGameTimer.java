@@ -8,6 +8,9 @@ import me.gram.underwaterffa.states.GameState;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import static me.gram.underwaterffa.Teams.ScoreboardTeams.blueScore;
+import static me.gram.underwaterffa.Teams.ScoreboardTeams.redScore;
+
 public class EndGameTimer {
 
     private UnderwaterFFA main;
@@ -26,14 +29,18 @@ public class EndGameTimer {
                     if (number == 10) {
                         main.setGamestate(GameState.ENDGAME);
                         new PlayerUtils(main).removeItems();
-                        Bukkit.broadcastMessage(new ChatUtils(main).prefix + "(Team) won!"); //TODO: add winner teams
+                        if (redScore == 0) {
+                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS BLUE!");
+                        } else if (blueScore == 0) {
+                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS RED!");
+                        }
                         new RedBlueTeam(main).clearTeams();
                     }
 
                     number--;
                 } else {
                     main.setGamestate(GameState.LOBBY);
-                    Bukkit.broadcastMessage(new ChatUtils(main).format("&aYou were added into minigame lobby"));
+                    Bukkit.broadcastMessage(new ChatUtils(main).format("&aYou were added to the minigame lobby"));
                     cancel();
                 }
             }
