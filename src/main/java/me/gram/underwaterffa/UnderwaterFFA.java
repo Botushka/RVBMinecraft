@@ -13,6 +13,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 
 public class UnderwaterFFA extends JavaPlugin {
+    /**
+     * UNFINISHED
+     * <p>
+     *TODO:
+     * Fix killfeed
+     * FIx Team chat messages
+     * Fix Death/Kill counter
+     * Do: when team hearts 0 team loses
+     * Do: Rocket launcher cooldown
+     * Done!
+     */
     private GameState gamestates;
 
     public GameState getGamestate() {
@@ -53,7 +64,7 @@ public class UnderwaterFFA extends JavaPlugin {
         pm.registerEvents(new MGListener(this), this);
         pm.registerEvents(new SwimListener(this), this);
         pm.registerEvents(new DamageEvent(this), this);
-        pm.registerEvents(new InventoryEvent(this),this);
+        pm.registerEvents(new InventoryEvent(this),this );
         pm.registerEvents(new SpawnPoints(this), this);
         pm.registerEvents(new RedBlueTeam(this), this);
         pm.registerEvents(new ReSpawnEvent(this), this);
