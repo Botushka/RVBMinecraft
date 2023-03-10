@@ -30,9 +30,9 @@ public class EndGameTimer {
                         main.setGamestate(GameState.ENDGAME);
                         new PlayerUtils(main).removeItems();
                         if (redScore == 0) {
-                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS BLUE!");
+                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS BLUE!!");
                         } else if (blueScore == 0) {
-                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS RED!");
+                            Bukkit.broadcastMessage(new ChatUtils(main).prefix + "THE WINNING TEAM IS RED!!");
                         }
                         new RedBlueTeam(main).clearTeams();
                     }
